@@ -38,7 +38,11 @@ class CameraVisionService:
         jpeg_quality: int | None = None,
     ) -> None:
         from config import settings
-        self.client = OpenAI(api_key=api_key or settings.openai_api_key)
+        base_url = settings.openai_base_url if settings.openai_base_url else None
+        self.client = OpenAI(
+            api_key=api_key or settings.openai_api_key,
+            base_url=base_url
+        )
         self.model_name = model_name or settings.openai_vision_model
         self.camera_index = settings.camera_index if camera_index is None else camera_index
         self.width = settings.camera_width if width is None else width

@@ -14,7 +14,11 @@ class ScreenVisionService:
 
     def __init__(self, api_key: str | None = None, model_name: str | None = None) -> None:
         from config import settings
-        self.client = OpenAI(api_key=api_key or settings.openai_api_key)
+        base_url = settings.openai_base_url if settings.openai_base_url else None
+        self.client = OpenAI(
+            api_key=api_key or settings.openai_api_key,
+            base_url=base_url
+        )
         self.model_name = model_name or settings.openai_vision_model
 
     def analyze_screen(self, user_request: str = "") -> str:

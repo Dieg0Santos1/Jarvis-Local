@@ -11,7 +11,11 @@ class SearchActions:
 
     def __init__(self, openai_api_key: str | None = None, openai_model: str | None = None) -> None:
         from config import settings
-        self.client = OpenAI(api_key=openai_api_key or settings.openai_api_key)
+        base_url = settings.openai_base_url if settings.openai_base_url else None
+        self.client = OpenAI(
+            api_key=openai_api_key or settings.openai_api_key,
+            base_url=base_url
+        )
         self.model = openai_model or settings.openai_model
 
     def search_and_summarize(self, query: str) -> str:

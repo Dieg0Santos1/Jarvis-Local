@@ -12,6 +12,7 @@ load_dotenv()
 @dataclass(slots=True)
 class Settings:
     openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
+    openai_base_url: str = os.getenv("OPENAI_BASE_URL", "")
     openai_model: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     openai_vision_model: str = os.getenv("OPENAI_VISION_MODEL", os.getenv("OPENAI_MODEL", "gpt-4o-mini"))
     camera_index: int = int(os.getenv("CAMERA_INDEX", "0"))
